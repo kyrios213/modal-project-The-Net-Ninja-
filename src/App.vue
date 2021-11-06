@@ -4,9 +4,28 @@
   <!-- <input type="text" ref="name" />
   <button @click="handleClick">Click Me</button> -->
   <div v-if="showModal">
-    <Modal :header="header" :text="text" theme="sale" @close="toggleModal" />
+    <Modal theme="sale" @close="toggleModal">
+      <template v-slot:links>
+        <a href="/">Sign Up Now!</a>
+        <a href="/">More info</a>
+      </template>
+      <h1>Ninja Giveaway</h1>
+      <p>Grab your ninja swag for half price!</p>
+    </Modal>
   </div>
-  <button @click="toggleModal">Open Modal</button>
+
+  <div v-if="showModalTwo">
+    <Modal @close="toggleModalTwo">
+      <template v-slot:links>
+        <a href="/">Check it out</a>
+      </template>
+      <h1>Welcome</h1>
+      <p>Normal Modal Component</p>
+    </Modal>
+  </div>
+
+  <p><button @click.alt="toggleModal">Open Sale Modal (alt)</button></p>
+  <p><button @click="toggleModalTwo">Open Modal</button></p>
 </template>
 
 <script>
@@ -17,9 +36,8 @@ export default {
   data() {
     return {
       title: "My First Vue App :)",
-      header: "Sign up for the Giveaway!",
-      text: "Grab your ninja swag for half price!",
       showModal: false,
+      showModalTwo: false,
     };
   },
   components: {
@@ -33,6 +51,9 @@ export default {
     // },
     toggleModal() {
       this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
     },
   },
 };
